@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>hi</title>
+</head>
+<body>
+
+    <textarea id="state"></textarea>
+
+<script>
+
+const textarea = document.querySelector('#state')
+
+// Create WebSocket connection.
+const socket = new WebSocket('ws://localhost:54321/ws?state_uri=redwood.tv/demo')
+
+// Connection opened
+// socket.addEventListener('open', function (event) {
+//     socket.send('Hello Server!');
+// });
+
+// Listen for messages
+socket.addEventListener('message', function (event) {
+    const message = JSON.parse(event.data)
+    textarea.value = JSON.stringify(message.state, null, 4)
+})
+
+</script>
+</body>
+</html>
